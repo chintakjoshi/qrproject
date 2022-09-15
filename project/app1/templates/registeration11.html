@@ -1,0 +1,233 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Au Register Forms </title>
+
+    <!-- Icons font CSS-->
+    <link href="{% static 'registration/vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'registration/vendor/font-awesome-4.7/css/font-awesome.min.css'%}" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'registration/vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'registration/vendor/datepicker/daterangepicker.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'registration/css/main.css' %}" rel="stylesheet" media="all">
+    <!-- bootstrap
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    jQuery library -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+
+    <!-- Popper JS -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
+
+    <!-- Latest compiled JavaScript -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> --> 
+</head>
+
+<body>
+  
+    <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-1">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title">Registration Info</h2>
+                    <form method="POST" onsubmit="return validation()">
+                        {% csrf_token %}
+                        <div class="input-group" style="margin-bottom: 0%">
+                                
+                            <input class="input--style-1" type="text" placeholder="NAME" name="username" id="name" autocomplete="off">
+                            
+                            <!-- {{ form.username }} -->
+                        </div>
+                        <span id="username" style="color: red; margin-left: 0%; font-size: 12px; margin-top: 0%"></span>
+                        <div class="row row-space" >
+                            <div class="col-2" style="margin-top: 6%">
+                                <div class="input-group" style="margin-bottom: 0%">
+                                    <!-- <input class="input--style-1 js-datepicker" type="text" placeholder="BIRTHDATE" name="birthday" data-date-format="YYYY-MM-DD"> -->
+                                   
+                                    <input class="input--style-1" placeholder="BIRTHDATE" name="birthday" data-date-format="YYYY-MM-DD" id="dob" autocomplete="off" style="background-color: transparent;" type="text" onfocus="(this.type='date')" onblur="(this.type='text')">
+                                    <!-- {{form.dob}} -->
+                                    <!-- <input placeholder="DOB" class="input--style-1" type="text" onfocus="(this.type='date')"  id="dob" autocomplete="off" data-date-format="YYYY-MM-DD" style="background-color: transparent;">  -->
+                                    <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                </div>
+                                <span id="date" style="color: red; margin-left: 0%; font-size: 12px;"></span>
+                            </div>
+                            <div class="col-2" style="margin-top: 6%;">
+                                <div class="input-group" style="margin-bottom: 0%">
+                                    <div class="rs-select2 js-select-simple select--no-search">
+                                        <select name="gender" id="gender" autocomplete="off">
+                                            <option disabled="disabled" selected="selected">GENDER</option>
+                                            <option name="gender">Male</option>
+                                            <option name="gender">Female</option>
+                                            <option name="gender">Other</option>
+                                        </select>
+                                        <!-- {{form.gender}} -->
+                                        <div class="select-dropdown"></div>
+                                        
+                                    </div>
+                                </div>
+                                <span id="gen" style="color: red; margin-left: 0%; font-size: 12px;"></span>
+                            </div>
+                        </div>
+
+                        <div class="row row-space" style="margin-top: 6%;">
+                            <div class="col-2">
+                                <div class="input-group" style="margin-bottom: 0%">
+                                    <input class="input--style-1" type="text" placeholder="MOBILE NUMBER" name="mobile" id="mobile" autocomplete="off">
+                                    <!-- {{ form.mobile }} -->
+                                </div>
+                                <span id="mob" style="color: red; margin-left: 0%; font-size: 12px;"></span>
+                            </div>
+                        </div>
+                        <div class="row row-space" style="margin-top: 6%;">
+                                <div class="col-2">
+                                    <div class="input-group" style="margin-bottom: 0%">
+                                        <input class="input--style-1" type="text" placeholder="EMAIL ID" name="email" id="email" autocomplete="off">
+                                        <!-- {{ form.email }} -->
+                                    </div>
+                                    <span id="mail" style="color: red; margin-left: 0%; font-size: 12px;"></span>
+                                </div>
+                         </div>
+                         
+                         
+                         <div class="row row-space" style="margin-top: 6%;">
+                                <div class="col-2">
+                                    <div class="input-group" style="margin-bottom: 0%">
+                                        <input class="input--style-1" type="password" placeholder="PASSWORD" name="password" id="password" autocomplete="off">
+                                        <!-- {{ form.password }} -->
+                                    </div>
+                                    <span id="pass" style="color: red; margin-left: 0%; font-size: 12px;"></span>
+                                </div>
+                         </div>
+                         <div class="row row-space" style="margin-top: 6%;">
+                                <div class="col-2">
+                                    <div class="input-group" style="margin-bottom: 0%">
+                                        <input class="input--style-1" type="password" placeholder="CONFIRM PASSWORD" name="conf_password" id="confirm_password" autocomplete="off">
+                                        <!-- {{ form.confirm_password }} -->
+                                    </div>
+                                    <span id="conpass" style="color: red; margin-left: 0%; font-size: 12px;"></span>
+                                </div>
+                         </div>
+                        <div class="p-t-20" >
+                            <button class="btn btn--radius btn--green" type="submit">Submit</button>
+                        </div><br><br>
+                        <div class="text-center w-full">
+                                <a class="txt1" href="{% url 'login' %}" style="color: #5f5a5a; text-decoration: none;">
+                                   <b> Already a user? LOGIN HERE</b>
+                                    <i class="fa fa-long-arrow-right"></i>						
+                                </a>
+                            </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="{% static 'registration/vendor/jquery/jquery.min.js' %}"></script>
+    <!-- Vendor JS-->
+    <script src="{% static 'registration/vendor/select2/select2.min.js' %}"></script>
+    <script src="{% static 'registration/vendor/datepicker/moment.min.js' %}"></script>
+    <script src="{% static 'registration/vendor/datepicker/daterangepicker.js' %}"></script>
+
+    <!-- Main JS-->
+    <script src="{% static 'registration/js/global.js' %}"></script>
+
+    <!--form validation javascript-->
+    <script type="text/javascript">
+        function validation(){
+            var name = document.getElementById('name').value;
+            var dob = document.getElementById('dob').value;
+            var mobile = document.getElementById('mobile').value;
+            var email = document.getElementById('email').value;
+            var gender = document.getElementById('gender').value;
+            var password = document.getElementById('password').value;
+            var confirm_password = document.getElementById('confirm_password').value;
+
+            if(name==""){
+                document.getElementById('username').innerHTML = "** Please fill the NAME field";
+                return false;
+            }
+            if(!isNaN(name)){
+                document.getElementById('username').innerHTML = "** Only Characters are allowed";
+                return false;
+            }
+            if((name.length <=2) || (name.length >40)){
+                document.getElementById('username').innerHTML = "** Name length must be between 2 to 40";
+                return false;
+            }
+            
+            if(dob==""){
+                document.getElementById('date').innerHTML = "** Please fill the DOB field";
+                return false;
+            }
+            if(gender==""){
+                document.getElementById('gen').innerHTML = "** Please fill the GENDER field";
+                return false;
+            }
+            if(mobile==""){
+                document.getElementById('mob').innerHTML = "** Please fill the MOBILE NUMBER field";
+                return false;
+            }
+            if(isNaN(mobile)){
+                document.getElementById('mob').innerHTML = "** Only Numbers are allowed";
+                return false;
+            }
+            if(mobile.length != 10){
+                document.getElementById('mob').innerHTML = "** Enter correct Mobile Number having 10 digits";
+                return false;
+            }
+            if(email==""){
+                document.getElementById('mail').innerHTML = "** Please fill the EMAIL ID field";
+                return false;
+            }
+            if(email.indexOf('@') <=0){
+                document.getElementById('mail').innerHTML = "** Invalid email id (@ should not be at 1st position)";
+                return false;
+            }
+            if((email.charAt(email.length-4)!='.') && (email.charAt(email.length-3)!='.')){
+                document.getElementById('mail').innerHTML = "** Invalid email id ";
+                return false;
+            }
+            if(password==""){
+                document.getElementById('pass').innerHTML = "** Please fill the PASSWORD field";
+                return false;
+            }
+            if((password.length <=5) || (password.length >10)){
+                document.getElementById('pass').innerHTML = "** Password length must be between 6 to 10";
+                return false;
+            }
+            if(password != confirm_password){
+                document.getElementById('conpass').innerHTML = "** Password doesnt match";
+                return false;
+            }
+            if(confirm_password==""){
+                document.getElementById('conpass').innerHTML = "** Please fill the CONFIRM PASSWORD field";
+                return false;
+            }
+            
+            
+        }
+    </script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->

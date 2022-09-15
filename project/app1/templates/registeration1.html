@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Registration</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 't/fonts/linearicons/style.css' %}">
+	<link rel="stylesheet" href="{% static 't/css/style2.css' %}">
+	
+</head>
+
+<body>
+
+	<div class="wrapper">
+		<div class="inner">
+			<!-- <img src="{% static 'images/image-1.png' %}" alt="" class="image-1"> -->
+			<form method="POST" onsubmit="return validation()">
+				{% csrf_token %}
+
+				<h3>Sign Up </h3>
+				<!-- <div class="form-holder">
+					<span class="lnr lnr-file-add"></span>
+					 <select class="form-control" name >
+							<option selected disabled>Select</option>
+							<option>Mrs.</option>
+							<option>Ms.</option>
+							<option>Miss</option>
+							<option>Dr.</option>
+							<option>Mr.</option>
+						</select> 
+				</div> -->
+				<div class="form-holder"><span id="username" style="color: red; margin-left: 50%; font-size: 12px; margin-top: 0%"></span>
+					<span class="lnr lnr-user"></span>
+					<input type="text" class="form-control" name="username" id="name"
+						placeholder="Username">
+						
+				</div>
+				
+				
+				<div class="form-holder">
+					<span class="fa fa-birthday-cake"></span>
+					<input class="form-control" placeholder="BIRTHDATE" name="birthday" data-date-format="YYYY-MM-DD" id="dob" autocomplete="off" style="background-color: transparent;" type="text" onfocus="(this.type='date')" onblur="(this.type='text') >
+                                   
+					<i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+
+					<span id="date" style="color: red; margin-left: 50%; font-size: 12px;"></span>
+				</div>
+				<div class="form-holder">
+						<span id="gen" style="color: red; margin-left: 0%; font-size: 12px;"></span>
+					<span class="fa fa-globe" style="color: #9e9e9e"></span>
+					<select class="form-control" id="gender" name="gender">
+						<option disabled="disabled" selected="selected">GENDER</option>
+						<option name="gender">Male</option>
+						<option name="gender">Female</option>
+						<option name="gender">Other</option>
+					</select>
+					
+				</div>
+				<div class="form-holder">
+					<span class="lnr lnr-phone-handset"></span>
+					<input type="text" class="form-control" name="mobile" id="mobile"
+						placeholder="Phone_Number" maxlength="10">
+						<span id="mob" style="color: red; margin-left: 50%; font-size: 12px;"></span>
+				</div>
+				<div class="form-holder">
+					<span class="lnr lnr-envelope"></span>
+					<input type="text" class="form-control" name="email" id="email" placeholder="Email">
+					<span id="mail" style="color: red; margin-left: 70%; font-size: 12px;"></span>
+				</div>
+				<div class="form-holder">
+					<span class="lnr lnr-lock"></span>
+					<input type="password" class="form-control" name="password" id="password" placeholder="Password">
+					<span id="pass" style="color: red; margin-left: 50%; font-size: 12px;"></span>
+				</div>
+				<div class="form-holder">
+					<span class="lnr lnr-lock"></span>
+					<input type="password" class="form-control" name="conf_password" id="confirm_password"
+						placeholder="Confirm_Password">
+						<span id="conpass" style="color: red; margin-left: 50%; font-size: 12px;"></span>
+				</div>
+				<div class="form-holder">
+					<span class="lnr lnr-lock"></span>
+					<input type="text" class="form-control" name="hint" id="id_hint"
+						placeholder="Security Hint">
+						<span id="conpass" style="color: red; margin-left: 50%; font-size: 12px;"></span>
+				</div>
+				
+				<button  type="submit">
+					<span>Sign Up</span>
+				</button>
+				<div style="text-align: center;margin-top: 30px;text-shadow: 0px 0px 3px">
+					<a href="{% url 'login' %}">Already a user? LOGIN HERE</a>
+				</div>
+			</form>
+			<img src="{% static 't/images/image-2.png' %}" alt="" class="image-2">
+		</div>
+
+	</div>
+
+	<script src="{% static 't/js/jquery-3.3.1.min.js' %}"></script>
+	<script src="{% static 't/js/main.js' %}"></script>
+
+	<!--form validation javascript-->
+	<script type="text/javascript">
+		function validation(){
+				var name = document.getElementById('name').value;
+				var dob = document.getElementById('dob').value;
+				var mobile = document.getElementById('mobile').value;
+				var email = document.getElementById('email').value;
+				var gender = document.getElementById('gender').value;
+				var password = document.getElementById('password').value;
+				var confirm_password = document.getElementById('confirm_password').value;
+
+				if(name==""){
+						document.getElementById('username').innerHTML = "** Please fill the NAME field";
+						return false;
+				}
+				if(!isNaN(name)){
+						document.getElementById('username').innerHTML = "** Only Characters are allowed";
+						return false;
+				}
+				if((name.length <=2) || (name.length >40)){
+						document.getElementById('username').innerHTML = "** Name length must be between 2 to 40";
+						return false;
+				}
+				
+				if(dob==""){
+						document.getElementById('date').innerHTML = "** Please fill the DOB field";
+						return false;
+				}
+				if(gender==""){
+						document.getElementById('gen').innerHTML = "** Please fill the GENDER field";
+						return false;
+				}
+				if(mobile==""){
+						document.getElementById('mob').innerHTML = "** Please fill the MOBILE NUMBER field";
+						return false;
+				}
+				if(isNaN(mobile)){
+						document.getElementById('mob').innerHTML = "** Only Numbers are allowed";
+						return false;
+				}
+				if(mobile.length != 10){
+						document.getElementById('mob').innerHTML = "** Enter correct Mobile Number having 10 digits";
+						return false;
+				}
+				if(email==""){
+						document.getElementById('mail').innerHTML = "** Please fill the EMAIL ID field";
+						return false;
+				}
+				if(email.indexOf('@') <=0){
+						document.getElementById('mail').innerHTML = "** Invalid email id (@ should not be at 1st position)";
+						return false;
+				}
+				if((email.charAt(email.length-4)!='.') && (email.charAt(email.length-3)!='.')){
+						document.getElementById('mail').innerHTML = "** Invalid email id ";
+						return false;
+				}
+				if(password==""){
+						document.getElementById('pass').innerHTML = "** Please fill the PASSWORD field";
+						return false;
+				}
+				if((password.length <=5) || (password.length >10)){
+						document.getElementById('pass').innerHTML = "** Password length must be between 6 to 10";
+						return false;
+				}
+				if(password != confirm_password){
+						document.getElementById('conpass').innerHTML = "** Password doesnt match";
+						return false;
+				}
+				if(confirm_password==""){
+						document.getElementById('conpass').innerHTML = "** Please fill the CONFIRM PASSWORD field";
+						return false;
+				}
+				
+				
+		}
+</script>
+
+</body>
+
+</html>

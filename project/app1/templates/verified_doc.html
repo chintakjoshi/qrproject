@@ -1,0 +1,463 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>DigitalWe</title>
+		
+		<!-- Favicon -->
+		<link rel="icon" type="image/png" sizes="56x56" href="{% static 't/images/fav-icon/icon.png' %}">
+
+		<!-- Main style sheet -->
+		<link rel="stylesheet" type="text/css" href="{% static 't/css/style.css' %}">
+		<!-- responsive style sheet -->
+    <link rel="stylesheet" type="text/css" href="{% static 't/css/responsive.css' %}">
+    
+    
+			
+	</head>
+
+	<body>
+		<div class="main-page-wrapper">
+			<!-- 
+			=============================================
+				Theme Header
+			============================================= 
+			-->
+			<header class="theme-main-header">
+				<div class="container">
+					<a href="index.html" class="logo float-left tran4s"><img style="width: 40% !important;" src="{% static 't/images/logo/Doc E-vault(5).png' %}" alt="Logo"></a>
+					
+					<!-- ========================= Theme Feature Page Menu ======================= -->
+					<nav class="navbar float-right theme-main-menu one-page-menu">
+					   <!-- Brand and toggle get grouped for better mobile display -->
+					   <div class="navbar-header">
+					     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
+					       <span class="sr-only">Toggle navigation</span>
+					       Menu
+					       <i class="fa fa-bars" aria-hidden="true"></i>
+					     </button>
+					   </div>
+					   <!-- Collect the nav links, forms, and other content for toggling -->
+					   <div class="collapse navbar-collapse" id="navbar-collapse-1">
+					     <ul class="nav navbar-nav">
+					       	<li ><a href="{% url 'index' %}">HOME</a></li>
+							<li ><a href="{% url 'verifyDoc' %}">Verify Your DOCUMENT</a></li>
+							<li class="active"><a href="{% url 'verifiedDoc' %}">Verified DOCUMENT</a></li>
+							<!-- <li><a href="{% url 'login' %}">SIGN IN</a></li> -->
+              <li><a href="#">Welcome {{ user }}</a></li>
+              <li><a href="{% url 'logout' %}">LOGOUT</a></li>
+							<!-- <li class="dropdown-holder"><a href="#blog-section">BLOG</a>
+								<ul class="sub-menu">
+					       			<li><a href="blog-details.html" class="tran3s">Blog Details</a></li>
+					       		</ul>
+							</li> -->
+					     </ul>
+					   </div><!-- /.navbar-collapse -->
+					</nav> <!-- /.theme-feature-menu -->
+				</div>
+				<style>
+					.zoom {
+					  
+					  
+					  transition: transform .2s; /* Animation */
+					 
+					  
+					  margin: 0 auto;
+					}
+					
+					.zoom:hover {
+					  transform: scale(0.9); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+					}
+					</style>
+			</header> <!-- /.theme-main-header -->
+
+
+			<!--
+			=====================================================
+				Theme Main SLider
+			=====================================================
+			-->
+      <div id="service-section">
+          <div class="container">
+			<div class="table-responsive">
+             
+              <center>
+                <BR><br><br><br><br>
+                  <table class="table" border="5">
+					  <thead>
+						  <tr style="color: white;">
+							<th scope="col"><center>Username</center></th>
+							<th scope="col"><center>Document Name</center></th>
+							<th scope="col"><center>Document Number</center></th>
+							<th scope="col"><center>Document Front Image</center></th>
+							<th scope="col"><center>Document Back Image</center></th>
+							<th scope="col"><center>QR Code</center></th>
+						  </tr>
+					  </thead>
+                      
+                      <tbody>
+						{% for m in li reversed %}
+                          <tr>
+							<td class="row" style="color: white; text-align: center;" data-column="column2">{{ user }}
+							</td>    
+                          
+
+                         
+                            
+                              <td style="color: white; text-align: center;" data-column="column2">{{ m.doc_name }}</td>
+                              
+                         
+
+                        
+                             
+                              <td class="column100 column2" style="color: white; text-align: center;" data-column="column2">{{ m.doc_no }}</td>
+                             
+                       
+
+                        
+                            
+                              <td class="column100 column2" data-column="column2"><center><img src="{{ m.doc_upload_front.url }}" height="100" width="200"></center></td>
+                              
+                   
+
+                     
+                           
+                              <td class="column100 column2" data-column="column2"><center><img src="{{ m.doc_upload_back.url }}" height="100" width="200"></center></td>
+                              
+                      
+
+                         
+                             
+                              <td class="zoom" data-column="column2"><center><img src="{{ m.qrcode.url }}" height="150" width="150"></center></td>
+						  </tr>
+						  {% endfor %}  
+                      </tbody>
+                  </table>
+               
+                  
+			  </center>
+			  </div>
+          </div>
+	  </div>
+	  <style>
+	  .button {
+		background-color: #4CAF50;
+		border: none;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+	  }
+	  </style>	  
+	  
+	  
+	 <center><a class="button" href="{% url 'card' %}">Generate card</a></center>
+	  
+	  
+	  
+ 	        <!--
+			=====================================================
+				About us Section
+			=====================================================
+			-->
+			<section id="about-us">
+				<div class="container">
+					<div class="theme-title">
+						<h2>HOW IT WORKS</h2><br>
+					</div> <!-- /.theme-title -->
+
+					<div class="row">
+						<div class="col-lg-3 col-md-3 col-sm-6">
+							<div class="single-about-content">
+								<div class="icon round-border tran3s">
+									<i class="fa fa-home" aria-hidden="true"></i>
+								</div>
+								<h5><a href="#" class="tran3s">1. Sign Up</a></h5>
+								
+								<!-- <a href="#" class="more tran3s hvr-bounce-to-right">More Details</a> -->
+							</div> <!-- /.single-about-content -->
+						</div> <!-- /.col -->
+
+						<div class="col-lg-3 col-md-3 col-sm-6">
+							<div class="single-about-content">
+								<div class="icon round-border tran3s">
+									<i class="fa fa-info-circle" aria-hidden="true"></i>
+								</div>
+								<h5><a href="#" class="tran3s">2. Get Documents Verified</a></h5>
+								
+								<!-- <a href="#" class="more tran3s hvr-bounce-to-right">More Details</a> -->
+							</div> <!-- /.single-about-content -->
+						</div> <!-- /.col -->
+
+						<div class="col-lg-3 col-md-3 col-sm-6">
+							<div class="single-about-content">
+								<div class="icon round-border tran3s">
+									<i class="fa fa-life-ring" aria-hidden="true"></i>
+								</div>
+								<h5><a href="#" class="tran3s">3. QR Code Generated</a></h5>
+								
+								<!-- <a href="#" class="more tran3s hvr-bounce-to-right">More Details</a> -->
+							</div> <!-- /.single-about-content -->
+						</div> <!-- /.col -->
+
+						<div class="col-lg-3 col-md-3 col-sm-6">
+							<div class="single-about-content">
+								<div class="icon round-border tran3s">
+									<i class="fa fa-line-chart" aria-hidden="true"></i>
+								</div>
+								<h5><a href="#" class="tran3s">4. QR Code Scanned By Government Authority</a></h5>
+							
+								<!-- <a href="#" class="more tran3s hvr-bounce-to-right">More Details</a> -->
+							</div> <!-- /.single-about-content -->
+						</div> <!-- /.col -->
+					</div> <!-- /.row -->
+				</div> <!-- /.container -->
+			</section> <!-- /#about-us -->
+
+
+			<!--
+			=====================================================
+				Service Section
+			=====================================================
+			-->
+			<div id="service-section">
+				<div class="container">
+					<div class="theme-title">
+						<h2>SERVICES WE PROVIDE</h2>
+						<p>Important Documents Anytime, Anywhere! Authentic Documents, Legally at Par with Originals. Digital Document Exchange with the consent of the citizen. Faster service Delivery- Government Benefits, Employment, Financial Inclusion, Education, Health. It generates a smart card which covered all document in one card.</p>
+					</div> <!-- /.theme-title -->
+
+					<div class="row">
+						<div class="col-lg-4 col-md-4 col-sm-6">
+							<div class="single-service-content">
+								<div class="icon-heading tran3s">
+									<div class="icon tran3s"><i class="fa fa-cloud" aria-hidden="true"></i></div>
+									<h6><a href="#" class="tran3s">Cloud data</a></h6>
+								</div>
+								<p>Enable digital empowerment of residents by providing them with digital card on the cloud</p>
+							</div> <!-- /.single-service-content -->
+						</div> <!-- /.col-lg -->
+
+						<div class="col-lg-4 col-md-4 col-sm-6">
+							<div class="single-service-content">
+								<div class="icon-heading tran3s">
+									<div class="icon tran3s"><i class="fa fa-sign-in" aria-hidden="true"></i></div>
+									<h6><a href="#" class="tran3s">E-signing data</a></h6>
+								</div>
+								<p>Enable e-Signing of documents and make them available electronically and online Minimize the use of physical documents</p>
+							</div> <!-- /.single-service-content -->
+						</div> <!-- /.col-lg -->
+
+						<div class="col-lg-4 col-md-4 col-sm-6">
+							<div class="single-service-content">
+								<div class="icon-heading tran3s">
+									<div class="icon tran3s"><i class="fa fa-book" aria-hidden="true"></i></div>
+									<h6><a href="#" class="tran3s">E-document data</a></h6>
+								</div>
+								<p>Ensure authenticity of the e-documents and thereby eliminate usage of fake documents</p>
+							</div> <!-- /.single-service-content -->
+						</div> <!-- /.col-lg -->
+
+						<div class="col-lg-4 col-md-4 col-sm-6">
+							<div class="single-service-content">
+								<div class="icon-heading tran3s">
+									<div class="icon tran3s"><i class="fa fa-info-circle" aria-hidden="true"></i></div>
+									<h6><a href="#" class="tran3s">Issued data</a></h6>
+								</div>
+								<p>Secure access to Govt. issued documents through a web portal and mobile application for residents</p>
+							</div> <!-- /.single-service-content -->
+						</div> <!-- /.col-lg -->
+
+						<div class="col-lg-4 col-md-4 col-sm-6">
+							<div class="single-service-content">
+								<div class="icon-heading tran3s">
+									<div class="icon tran3s"><i class="fa fa-life-ring" aria-hidden="true"></i></div>
+									<h6><a href="#" class="tran3s">Services data</a></h6>
+								</div>
+								<p>Reduce administrative overhead of Govt. departments and agencies and make it easy for the residents to receive services</p>
+							</div> <!-- /.single-service-content -->
+						</div> <!-- /.col-lg -->
+
+						<div class="col-lg-4 col-md-4 col-sm-6">
+							<div class="single-service-content">
+								<div class="icon-heading tran3s">
+									<div class="icon tran3s"><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
+									<h6><a href="#" class="tran3s">Standard data</a></h6>
+								</div>
+								<p>Open and interoperable standards based architecture to support a well-structured standard document format to support easy sharing of documents across departments and agencies</p>
+							</div> <!-- /.single-service-content -->
+						</div> <!-- /.col-lg -->
+					</div> <!-- /.row -->
+				</div> <!-- /.container -->
+			</div> <!-- /#service-section -->
+
+			<!--
+			=====================================================
+				Contact Section
+			=====================================================
+			-->
+			<div id="contact-section">
+				<div class="container">
+					<div class="clear-fix contact-address-content">
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<div class="left-side">
+								<h2>Contact Info</h2>
+								<p>Targeted at the idea of paperless governance, Digital card is a platform for issuance and verification of documents & certificates in a digital way, thus eliminating the use of physical documents. Indian citizens who sign up for a Digital card account get a dedicated cloud storage space that is linked to their Aadhaar (UIDAI) number. <br><br>Organizations that are registered with Digital card can push electronic copies of documents and certificates (e.g. driving license, Voter ID, education certificates) directly into citizens cards. Citizens can also upload scanned copies of their legacy documents in their accounts. These legacy documents can be electronically signed using the eSign facility.</p>
+
+								<ul>
+									<li>
+										<div class="icon tran3s round-border p-color-bg"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+										<h6>Address</h6>
+										<p>Freedom Way, Jersey City, NJ 07305, IN</p>
+									</li>
+									<li>
+										<div class="icon tran3s round-border p-color-bg"><i class="fa fa-phone" aria-hidden="true"></i></div>
+										<h6>Phone</h6>
+										<p><a href="tel:90310">+91 90010</a></p>
+									</li>
+									<li>
+										<div class="icon tran3s round-border p-color-bg"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+										<h6>Email</h6>
+										<p><a href="mailto:suzench1002@gmail.com">gj@gmail.com</a></p>
+									</li>
+								</ul>
+							</div> <!-- /.left-side -->
+						</div> <!-- /.col- -->
+
+
+						<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+							<!-- Contact Form -->
+					<div class="send-message">
+						<h2>Send Feedback</h2>
+
+            <form action="" class="form-validation" id="gform" class="gform" method="POST">
+              {% csrf_token %}
+							<div class="row">
+								<div class="col-lg-4 col-md-2 col-sm-6 col-xs-12">
+									<div class="single-input">
+										<input type="text" placeholder="Name*" name="name">
+									</div> <!-- /.single-input -->
+								</div>
+							
+								<div class="col-lg-4 col-md-2 col-sm-12 col-xs-12">
+									<div class="single-input">
+										<input type="email" placeholder="Your Email*" name="email">
+									</div> <!-- /.single-input -->
+								</div>
+							</div> <!-- /.row -->
+						
+							<textarea placeholder="Write Message" name="message"></textarea>
+
+
+							<button class="tran3s p-color-bg" type="submit">Send Feedback </button>
+						</form>
+
+
+						<!-- Contact Form Validation Markup -->
+						<!-- Contact alert -->
+						<div class="alert-wrapper thankyou_message" id="alert-success">
+							<div id="success">
+								<button class="closeAlert"><i class="fa fa-times" aria-hidden="true"></i></button>
+								<div class="wrapper">
+					               	<p>Your message was sent successfully.</p>
+					             </div>
+					        </div>
+					    </div> <!-- End of .alert_wrapper -->
+					    <div class="alert-wrapper" id="alert-error">
+					        <div id="error">
+					           	<button class="closeAlert"><i class="fa fa-times" aria-hidden="true"></i></button>
+					           	<div class="wrapper">
+					               	<p>Sorry!Something Went Wrong.</p>
+					            </div>
+					        </div>
+					    </div> <!-- End of .alert_wrapper -->
+					</div> <!-- /.send-message -->
+						</div> <!-- /.col- -->
+					</div> <!-- /.contact-address-content -->					
+				</div> <!-- /.container -->
+			</div> <!-- /#contact-section -->
+
+			<!--
+			=====================================================
+				Footer
+			=====================================================
+			-->
+			<footer>
+				<div class="container">
+					<a href="index.html" class="logo"><img src="{% static 't/images/logo/DigiCard.png' %}" alt="Logo"></a>
+					<ul>
+						<li><a href="#" class="tran3s round-border"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+						<li><a href="#" class="tran3s round-border"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						<li><a href="#" class="tran3s round-border"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+						<li><a href="#" class="tran3s round-border"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+						<li><a href="#" class="tran3s round-border"><i class="fa fa-skype" aria-hidden="true"></i></a></li>
+					</ul>
+					<p>Copyright &copy;2020 All rights reserved | Developed <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#DigiCard" target="_blank">DigitalWe</a></p>
+				</div>
+			</footer>
+
+			<!-- =============================================
+				Loading Transition
+			============================================== -->
+			<div id="loader-wrapper">
+				<div id="preloader_1">
+	                <span></span>
+	                <span></span>
+	                <span></span>
+	                <span></span>
+	                <span></span>
+	            </div>
+			</div>
+
+	        <!-- Scroll Top Button -->
+			<button class="scroll-top tran3s p-color-bg">
+				<i class="fa fa-long-arrow-up" aria-hidden="true"></i>
+			</button>
+
+		<!-- Js File_________________________________ -->
+
+		<!-- j Query -->
+		<script type="text/javascript" src="{% static 't/vendor/jquery.2.2.3.min.js' %}"></script>
+
+		<!-- Bootstrap JS -->
+		<script type="text/javascript" src="{% static 't/vendor/bootstrap/bootstrap.min.js' %}"></script>
+
+		<!-- Vendor js _________ -->
+		
+		<!-- revolution -->
+		<script src="{% static 't/vendor/revolution/jquery.themepunch.tools.min.js' %}"></script>
+		<script src="{% static 't/vendor/revolution/jquery.themepunch.revolution.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 't/vendor/revolution/revolution.extension.slideanims.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 't/vendor/revolution/revolution.extension.layeranimation.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 't/vendor/revolution/revolution.extension.navigation.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 't/vendor/revolution/revolution.extension.kenburn.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 't/vendor/revolution/revolution.extension.actions.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 't/vendor/revolution/revolution.extension.video.min.js' %}"></script>
+
+		<!-- Google map js -->
+		
+		<script src="{% static 't/vendor/gmaps.min.js' %}"></script>
+		<!-- owl.carousel -->
+		<script type="text/javascript" src="{% static 't/vendor/owl-carousel/owl.carousel.min.js' %}"></script>
+		<!-- mixitUp -->
+		<script type="text/javascript" src="{% static 't/vendor/jquery.mixitup.min.js' %}"></script>
+		<!-- Progress Bar js -->
+		<script type="text/javascript" src="{% static 't/vendor/skills-master/jquery.skills.js' %}"></script>
+		<!-- Validation -->
+		<script type="text/javascript" src="{% static 't/vendor/contact-form/validate.js' %}"></script>
+		<script type="text/javascript" src="{% static 't/vendor/contact-form/jquery.form.js' %}"></script>
+
+
+		<!-- Theme js -->
+		<script type="text/javascript" src="{% static 't/js/theme.js' %}"></script>
+		<script type="text/javascript" src="{% static 't/js/map-script.js' %}"></script>
+
+		</div> <!-- /.main-page-wrapper -->
+	</body>
+</html>
